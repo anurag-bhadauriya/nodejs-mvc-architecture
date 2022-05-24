@@ -20,10 +20,20 @@ class Router {
         this._attachWebRoutes();
 
         // TODO - handle 404 error
+        this._handlePageNotFound();
         // TODO - handle other exceptions
 
         // TODO - register this router
         app.use(this.router);
+    }
+
+    /**
+     * Handles if none of the paths gets matched
+     */
+    _handlePageNotFound() {
+        this.router.all('*', (req, res) => {
+            res.status(404).send('Path not found !');
+        });
     }
 
     _attachWebRoutes() {
