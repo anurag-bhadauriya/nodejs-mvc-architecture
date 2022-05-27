@@ -1,3 +1,5 @@
+const ModelNotFoundException = require("../exceptions/model-not-found.exception");
+
 class BaseRepository {
 
     constructor(model) {
@@ -10,6 +12,9 @@ class BaseRepository {
         const record = await this.model.findOne({
             where: where
         });
+        if (!record) {
+            throw new ModelNotFoundException(this.model.name);
+        }
         return record;
     }
 
@@ -18,11 +23,15 @@ class BaseRepository {
     }
 
     async findById(id) {
-        return await this.model.findOne({
+        const data = await this.model.findOne({
             where: {
                 id: id
             }
         });
+        if (!data) {
+            throw new ModelNotFoundException(this.model.name);
+        }
+        return data;
     }
 
     async create() { }
