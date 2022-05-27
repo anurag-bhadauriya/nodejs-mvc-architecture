@@ -1,15 +1,19 @@
 const express = require('express');
 const _ = require('lodash');
-const webRoutes = require('./web/index');
+const bodyParser = require('body-parser');
+const webRoutes = require('./web');
+const apiRoutes = require('./api');
 
 class Router {
     constructor() {
         this.router = express.Router();
         this.webRoutes = webRoutes;
+        this.apiRoutes = apiRoutes;
     }
 
     create(app) {
         // TODO - attach some middleware
+        this._attachMiddlewares();
 
         // TODO - attach some routes
         app.get('/', (req, res) => {
@@ -18,10 +22,13 @@ class Router {
 
         // TODO - attach routes via router class
         this._attachWebRoutes();
+        this._attachApiRoutes();
 
         // TODO - handle 404 error
         this._handlePageNotFound();
+
         // TODO - handle other exceptions
+        this._handleExceptions();
 
         // TODO - register this router
         app.use(this.router);
@@ -36,12 +43,31 @@ class Router {
         });
     }
 
+    _handleExceptions() {
+        this.router.use((err, req, res, next) => {
+            err.statusCode = err.status || 500;
+            return res.status(err.statusCode).send({
+                message: err.message
+            });
+        });
+    }
+
+    _catchError(route) {
+        return (req, res, next) => {
+            route(req, res, next).catch((err) => next(err));
+        }
+    }
+
+    _attachMiddlewares() {
+        this.router.use(bodyParser.json());
+    }
+
     _attachWebRoutes() {
         this._attachRoutes(this.webRoutes);
     }
 
     _attachApiRoutes() {
-        // this._attachRoutes(this.apiRoutes, '/api');
+        this._attachRoutes(this.apiRoutes, '/api');
     }
 
     /**
@@ -52,7 +78,7 @@ class Router {
     _attachRoutes(routeGroups, prefix = '') {
         _.forEach(routeGroups, ({ group, routes }) => {
             _.forEach(routes, ({ method, path, handler }) => {
-                this.router[method](prefix + group.prefix + path, handler);
+                this.router[method](prefix + group.prefix + path, this._catchError(handler));
             });
         });
     }

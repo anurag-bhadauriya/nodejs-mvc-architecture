@@ -1,7 +1,6 @@
 'use strict';
-const {
-    Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+const bcrypt = require('bcrypt');
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         /**
@@ -22,7 +21,24 @@ module.exports = (sequelize, DataTypes) => {
         sequelize,
         modelName: 'User',
         underscored: true,
-        tableName: 'users'
+        tableName: 'users',
+        hooks: {
+            beforeCreate: hashPassword,
+            beforeUpdate: hashPassword
+
+        }
     });
     return User;
 };
+
+/**
+ * Change the password from text to hashed version
+ * @param {*} user 
+ * @returns user with the hashed password if the password is updated
+ */
+const hashPassword = async (user) => {
+    if (user.changed('password')) {
+        user.password = await bcrypt.hash(user.password, 10);
+    }
+    return user;
+}

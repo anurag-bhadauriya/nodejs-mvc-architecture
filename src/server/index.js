@@ -1,5 +1,5 @@
 const express = require('express');
-const Router = require('../router/index');
+const Router = require('../router');
 
 class Server {
 
