@@ -2,8 +2,13 @@ const BadRequestException = require('../../exceptions/bad-request.exception');
 const InvalidCredentialException = require('../../exceptions/invalid-credentials.exception');
 const UserRepository = require('../../repositories/user.repository');
 const AuthService = require('../../services/auth-service');
+const nodemailer = require('nodemailer');
+const mailConfig = require('../../../config/mail');
+const Mail = require('../../modules/mailer');
 
 class AuthController {
+
+    constructor() { }
 
     async login(req, res) {
         const { email, password } = req.body;
@@ -36,10 +41,24 @@ class AuthController {
         try {
             const user = await UserRepository.create(data);
             const token = await AuthService.generateTokens({ id: user.id });
+
+            // Uncomment below code to send mail while registering a user
+            // await Mail.send('user-registration-template', (message) => {
+            //     message
+            //         .from(mailConfig.from)
+            //         .to(data.email)
+            //         .subject(`Account creation confirmation.`)
+            //         .with({
+            //             firstName: data.firstName,
+            //             lastName: data.lastName,
+            //             email: data.email
+            //         });
+            // });
+
             res.send({ user, ...token });
         } catch (e) {
             console.log('AuthController | register | ', e);
-            throw new BadRequestException(e.errors[0].message);
+            throw new BadRequestException(e.message);
         }
     }
 }

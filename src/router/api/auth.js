@@ -1,4 +1,4 @@
-const AuthController = require('../../app/controllers/api/auth-controller');
+const AuthController = require('../../app/controllers/api/auth.controller');
 const { validate } = require('../../app/middlewares/validate');
 const ValidationRules = require('../../app/validators');
 

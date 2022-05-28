@@ -10,3 +10,6 @@ sequelize model:generate --name User --attributes firstName:string,lastName:stri
 sequelize seed:generate --name user-seed
 [UP] sequelize db:seed:all
 [DOWN] sequelize db:seed:undo
+
+
+User mailtrap for mailing
