@@ -1,5 +1,6 @@
 const express = require('express');
 const Router = require('../router');
+const Scheduler = require('../app/scheduler');
 
 class Server {
 
@@ -11,11 +12,16 @@ class Server {
 
     start() {
         this._setupRoutes();
+        // this._startScheduler(); // Uncomment to start the schedulers
         this._listen();
     }
 
     _setupRoutes() {
         this.router.create(this.app);
+    }
+
+    _startScheduler() {
+        Scheduler.scheduleTasks();
     }
 
     _listen() {

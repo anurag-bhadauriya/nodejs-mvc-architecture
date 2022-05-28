@@ -5,6 +5,7 @@ const AuthService = require('../../services/auth-service');
 const nodemailer = require('nodemailer');
 const mailConfig = require('../../../config/mail');
 const Mail = require('../../modules/mailer');
+const logger = require('../../modules/logger');
 
 class AuthController {
 
@@ -43,6 +44,7 @@ class AuthController {
             const token = await AuthService.generateTokens({ id: user.id });
 
             // Uncomment below code to send mail while registering a user
+
             // await Mail.send('user-registration-template', (message) => {
             //     message
             //         .from(mailConfig.from)
@@ -57,8 +59,8 @@ class AuthController {
 
             res.send({ user, ...token });
         } catch (e) {
-            console.log('AuthController | register | ', e);
-            throw new BadRequestException(e.message);
+            logger.error('AuthController | register | ', e);
+            throw new BadRequestException(e);
         }
     }
 }
