@@ -71,14 +71,18 @@ class Router {
     }
 
     /**
-     * Attaches the api paths/routes in generic manner
+     * Attaches the api paths/routes and their middlewares in generic manner
      * @param {*} routeGroups 
      * @param {*} prefix 
      */
     _attachRoutes(routeGroups, prefix = '') {
         _.forEach(routeGroups, ({ group, routes }) => {
-            _.forEach(routes, ({ method, path, handler }) => {
-                this.router[method](prefix + group.prefix + path, this._catchError(handler));
+            _.forEach(routes, ({ method, path, middleware = [], handler }) => {
+                this.router[method](
+                    prefix + group.prefix + path,
+                    [...group.middleware || [], ...middleware],
+                    this._catchError(handler)
+                );
             });
         });
     }

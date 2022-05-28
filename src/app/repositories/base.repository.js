@@ -34,7 +34,9 @@ class BaseRepository {
         return data;
     }
 
-    async create() { }
+    async create(data) {
+        return await this.model.create(data);
+    }
 
     async update() { }
 

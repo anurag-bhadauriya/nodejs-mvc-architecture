@@ -8,6 +8,7 @@
         "dev": "nodemon server.js",
         "revert-db": "sequelize db:migrate:undo:all",
         "init-db": "sequelize db:migrate && sequelize db:seed:all",
+        "reset-db": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

@@ -1,3 +1,4 @@
+const BadRequestException = require('../../exceptions/bad-request.exception');
 const InvalidCredentialException = require('../../exceptions/invalid-credentials.exception');
 const UserRepository = require('../../repositories/user.repository');
 const AuthService = require('../../services/auth-service');
@@ -26,7 +27,20 @@ class AuthController {
     }
 
     async register(req, res) {
-        res.send('Register');
+        const data = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password
+        };
+        try {
+            const user = await UserRepository.create(data);
+            const token = await AuthService.generateTokens({ id: user.id });
+            res.send({ user, ...token });
+        } catch (e) {
+            console.log('AuthController | register | ', e);
+            throw new BadRequestException(e.errors[0].message);
+        }
     }
 }
 
