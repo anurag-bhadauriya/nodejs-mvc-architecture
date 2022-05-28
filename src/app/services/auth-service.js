@@ -9,7 +9,6 @@ class AuthService {
     }
 
     async generateTokens(payload) {
-        console.log('PLI: ', payload.id);
         const refreshToken = Tokenizer.generateRefreshToken();
 
         await RefreshToken.create({
