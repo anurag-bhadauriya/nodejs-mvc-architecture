@@ -25,5 +25,5 @@ User mailtrap for mailing
 8. Validations
 9. Sending emails
 10. Scheduler & Logger
-11. Uploading files
+<!-- 11. Uploading files -->
 12. Web sockets
