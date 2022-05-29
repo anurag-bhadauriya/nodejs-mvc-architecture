@@ -1,0 +1,303 @@
+{
+    "info": {
+        "_postman_id": "6cab03a1-8f73-47e9-bd76-04d77f4803ee",
+        "name": "Nodejs-mvc-architecture",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Web",
+            "item": [
+                {
+                    "name": "Pages",
+                    "item": [
+                        {
+                            "name": "page home",
+                            "id": "05e3bf00-07d3-4299-a8ba-b14136e5e818",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": "{{endpoint}}/pages"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "page contact",
+                            "id": "97c24b6b-c785-4d28-96e2-7b40d8d4d6bf",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": "{{endpoint}}/pages/contact"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "page about",
+                            "id": "5055ea44-a643-460a-a729-1cf3a4db6a26",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": "{{endpoint}}/pages/about"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "2d25b1b8-23b2-4cba-97c0-d237a3d34cdd"
+                }
+            ],
+            "id": "dfc432fa-5bd1-44ba-9947-f246dc3e0573"
+        },
+        {
+            "name": "Api",
+            "item": [
+                {
+                    "name": "Auth",
+                    "item": [
+                        {
+                            "name": "Login",
+                            "id": "5d97974a-54b6-4c4b-ba3a-08add5d4a8a9",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": "{{endpoint}}/api/auth/login"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Register",
+                            "id": "b7e19e6c-e000-48af-b0ce-8ebe4a76017c",
+                            "request": {
+                                "method": "POST",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\r\n    \"firstName\": \"User\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"jd@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": "{{endpoint}}/api/auth/register"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "27d07a54-238e-448e-93e5-26c91b8b6cae"
+                },
+                {
+                    "name": "User",
+                    "item": [
+                        {
+                            "name": "all users",
+                            "id": "cf258dda-84d1-4efc-811b-6571df6d4229",
+                            "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                            },
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\r\n    \"email\": \"john.doe@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    }
+                                },
+                                "url": "{{endpoint}}/api/user/"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "by id",
+                            "id": "9956dc5f-c422-4f93-8400-e7ed77008fe3",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{endpoint}}/api/user/:id",
+                                    "host": [
+                                        "{{endpoint}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "user",
+                                        ":id"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "id",
+                                            "value": "1"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "d5e83608-5870-4c14-8062-55d66f456b03"
+                },
+                {
+                    "name": "Product",
+                    "item": [
+                        {
+                            "name": "Product index",
+                            "id": "7cf473c9-b9c4-49b9-a2ba-074b68de6181",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": "{{endpoint}}/api/product/"
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "7fd687d5-f25b-4f6b-abaa-75a60f151466",
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "id": "c3929b29-9b35-4804-8eb4-0ef0fcc2e3fb",
+                                "type": "text/javascript",
+                                "exec": [
+                                    ""
+                                ]
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "id": "fe86e80b-034c-48d9-8340-e38d78aacf6b",
+                                "type": "text/javascript",
+                                "exec": [
+                                    ""
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Logs",
+                    "item": [
+                        {
+                            "name": "Date List",
+                            "id": "c8849eb6-8213-4292-b17b-e0298bb6b347",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": "{{endpoint}}/api/logs/date-list"
+                            },
+                            "response": []
+                        },
+                        {
+                            "name": "Logs by Date",
+                            "id": "aab8b869-f4e8-479a-85ba-599aa77cb79b",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{endpoint}}/api/logs/:date",
+                                    "host": [
+                                        "{{endpoint}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "logs",
+                                        ":date"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "date",
+                                            "value": "2022-05-28"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ],
+                    "id": "603a815e-ca70-4f4f-b20d-4372a578cf82"
+                }
+            ],
+            "id": "9b3231f6-af6f-494b-ae93-2c87fe52007e",
+            "auth": {
+                "type": "bearer",
+                "bearer": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2huLmRvZUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJpYXQiOjE2NTM3NTQ1NDQsImV4cCI6MTY1Mzc1ODE0NH0.mNjxTeVWs4o3mShPCKalB2Begzu76GJVWx4O5X6t-F4"
+                }
+            },
+            "event": [
+                {
+                    "listen": "prerequest",
+                    "script": {
+                        "id": "5330ebfe-1c8f-4fd4-a850-b78ca5ab3a68",
+                        "type": "text/javascript",
+                        "exec": [
+                            ""
+                        ]
+                    }
+                },
+                {
+                    "listen": "test",
+                    "script": {
+                        "id": "0ac4d8ef-19d5-43aa-8ac1-3d256743da0f",
+                        "type": "text/javascript",
+                        "exec": [
+                            ""
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Server Health Check",
+            "id": "e45f076c-a7ef-4518-bad9-a742e9ef0228",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{endpoint}}/"
+            },
+            "response": []
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "id": "97a678de-db10-4ccc-b3dd-0af2473df8e3",
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "id": "ea6328f5-374e-4678-963a-589eef6b1a77",
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "id": "c3a394ee-a795-4b01-b70a-f99d1b1d3b9a",
+            "key": "endpoint",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
+}
