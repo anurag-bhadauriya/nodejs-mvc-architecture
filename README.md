@@ -13,3 +13,17 @@ sequelize seed:generate --name user-seed
 
 
 User mailtrap for mailing
+
+
+1. Creating Server & Router
+2. Database sequelize & user model
+3. Authentication 
+4. Exception
+5. Repositories 
+6. Services
+7. Middlewares
+8. Validations
+9. Sending emails
+10. Scheduler & Logger
+11. Uploading files
+12. Web sockets

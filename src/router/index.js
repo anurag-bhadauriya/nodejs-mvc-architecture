@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const webRoutes = require('./web');
 const apiRoutes = require('./api');
 const logger = require('../app/modules/logger');
+const appConfig = require('../config/app-config');
+const BaseException = require('../app/exceptions/base-exception');
 
 class Router {
     constructor() {
@@ -48,6 +50,14 @@ class Router {
         this.router.use((err, req, res, next) => {
             err.statusCode = err.status || 500;
             logger.error(err.message);
+
+            if (appConfig.appEnv == 'production' && !(err instanceof BaseException)) {
+                return res.status(err.statusCode).send({
+                    message: 'Something went wrong!',
+                    status: err.statusCode
+                });
+            }
+
             return res.status(err.statusCode).send({
                 message: err.message
             });

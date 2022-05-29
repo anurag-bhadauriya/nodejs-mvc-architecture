@@ -25,7 +25,7 @@ class AuthController {
             };
             const tokens = await AuthService.generateTokens(payload);
 
-            res.send({ user, ...tokens });
+            res.send(parsedResponse(user, tokens));
         } catch (err) {
             throw new InvalidCredentialException();
         }
@@ -57,11 +57,25 @@ class AuthController {
             //         });
             // });
 
-            res.send({ user, ...token });
+            res.send(parsedResponse(user, token));
         } catch (e) {
             logger.error('AuthController | register | ', e);
             throw new BadRequestException(e);
         }
+    }
+
+
+}
+
+const parsedResponse = (user, tokens) => {
+    return {
+        user: {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName
+        },
+        ...tokens
     }
 }
 
